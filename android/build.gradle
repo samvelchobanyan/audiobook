@@ -1,3 +1,5 @@
+// Flutter's plugin loader will manage AGP/Kotlin plugin versions. No explicit buildscript needed.
+
 allprojects {
     repositories {
         google()

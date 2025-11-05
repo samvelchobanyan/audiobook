@@ -10,13 +10,13 @@ class CatalogRepository {
 
   Future<List<BookCardItem>> fetchCatalog() async {
     // Build catalog URL defensively to avoid double slashes
-  final catalogPath = 'audiobooks/catalog.json';
+  const catalogPath = 'audiobooks/catalog.json';
     final urlString = baseUrl.endsWith('/') ? '$baseUrl$catalogPath' : '$baseUrl/$catalogPath';
     final url = Uri.parse(urlString);
     debugPrint('CatalogRepository: fetching catalog from $urlString');
     final res = await http.get(url);
     if (res.statusCode != 200) {
-      final bodySnippet = res.body.length > 200 ? res.body.substring(0, 200) + '...' : res.body;
+      final bodySnippet = res.body.length > 200 ? '${res.body.substring(0, 200)}...' : res.body;
       throw Exception('Failed to load catalog: ${res.statusCode} - $bodySnippet');
     }
 

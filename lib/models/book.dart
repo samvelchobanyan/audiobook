@@ -57,8 +57,11 @@ class TrackItem {
     }
 
     // Otherwise resolve from baseTrackUrl (which should be the parent folder or bookJsonUrl).
-    final file = json['file'] as String? ?? '';
-    final candidate = '$baseTrackUrl/$file'.replaceAll('//', '/');
+    // New schema uses 'audio'; old schema used 'file'.
+    final rel = (json['audio'] as String?) ?? (json['file'] as String?) ?? '';
+    final candidate = baseTrackUrl.endsWith('/')
+        ? '$baseTrackUrl$rel'
+        : '$baseTrackUrl/$rel';
     return TrackItem(
       id: id,
       url: candidate,

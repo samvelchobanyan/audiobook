@@ -20,8 +20,8 @@ final bookRepositoryProvider = Provider<BookRepository>((ref) {
 final booksProvider = FutureProvider<List<BookCardItem>>((ref) async {
   final repo = ref.read(catalogRepositoryProvider);
   final base = ref.read(baseUrlProvider);
-  final catalogPath = 'audiobooks/catalog.json';
-  final catalogUrl = base.endsWith('/') ? '${base}$catalogPath' : '$base/$catalogPath';
+  const catalogPath = 'audiobooks/catalog.json';
+  final catalogUrl = base.endsWith('/') ? '$base$catalogPath' : '$base/$catalogPath';
   // Log the exact URL the app will fetch so it appears in the console
   // Visible in Flutter logs (debugPrint)
   // Example: Catalog URL: https://.../catalog.json
